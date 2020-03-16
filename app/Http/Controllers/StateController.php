@@ -19,9 +19,18 @@ class StateController extends Controller
      */
     public function index()
     {
-        $states = State::orderBy('id')->get();
+        try {
+            $states = State::orderBy('id')->with(['createdUser', 'updatedUser'])->get()->map(function($state){
+                $state['links'] = ["href" => "/state/".$state->id, "rel" => "estado"];
 
-        return response()->json(['states' => $states]);
+                return $state;
+            });
+
+            return response()->json(['success' => true, 'data' => $states, 'error' => null]);
+        } catch (\Exception $exception) {
+            return response()->json(['success' => false, 'data' => null, 'error' => $exception]);
+        }
+
     }
 
     /**

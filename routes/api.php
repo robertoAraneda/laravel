@@ -42,3 +42,21 @@ Route::group([
     Route::apiResource('state', 'StateController');
 
 });
+
+Route::group([
+    'prefix' => 'v1'
+], function ($router) {
+
+    Route::get('/', function(){
+        $base_url =  "http://localhost/api/v1/";
+
+        return response()->json([
+            'api' => "Api labnote",
+            "version" => "v1",
+            'base_url' => "http://localhost",
+            'prefix' => "/api/v1",
+            "state" => ["GET" => $base_url."state", "POST" => $base_url."state", "PUT" => $base_url."state/{id}", "DELETE" => $base_url."state/{id}", "_GET" => "$base_url.state/{id}"]
+        ], 200);
+    });
+
+});
