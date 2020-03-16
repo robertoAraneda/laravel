@@ -39,6 +39,6 @@ Route::group([
 
 ], function ($router) {
 
-    Route::get('state', 'StateController@index');
+    Route::apiResource('state', 'StateController');
 
 });
