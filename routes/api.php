@@ -31,3 +31,14 @@ Route::group([
     Route::post('me', 'AuthController@me');
 
 });
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'v1'
+
+], function ($router) {
+
+    Route::get('state', 'StateController@index');
+
+});
