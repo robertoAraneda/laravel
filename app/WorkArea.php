@@ -3,14 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
 
-class State extends Model
+class WorkArea extends Model
 {
-
-  protected $table = 'states';
-
-
   public function createdUser()
   {
     return $this->belongsTo(User::class, 'created_user_id');
